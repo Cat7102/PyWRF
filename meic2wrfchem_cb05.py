@@ -208,8 +208,8 @@ def make_wrfchemi(x):
     wrf_time_bjt = wrf_time_utc + timedelta(hours=8)
     # emiss_year=wrf_time_bjt.strftime('%Y')
     emiss_year=wrf_time_bjt.strftime('%Y')
-    if emiss_year > 2017: # 20220729：目前meic数据只到2017年，如果后续更新则需要修改。这行代码解决了超出2017年数据pickle的写入与读取文件名不同的问题。
-        emiss_year = 2017
+    if int(emiss_year) > 2017: # 20220729：目前meic数据只到2017年，如果后续更新则需要修改。这行代码解决了超出2017年数据pickle的写入与读取文件名不同的问题。
+        emiss_year = "2017"
     emiss_month=wrf_time_bjt.strftime('%m')
     domain_id = wrfinput_file.split("_")[-1][-2:]   #"01"
     logger.info("start generating "+wrf_time_utc.strftime("%Y-%m-%d_%H:00:00"))
