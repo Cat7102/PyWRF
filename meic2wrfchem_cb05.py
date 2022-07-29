@@ -208,6 +208,8 @@ def make_wrfchemi(x):
     wrf_time_bjt = wrf_time_utc + timedelta(hours=8)
     # emiss_year=wrf_time_bjt.strftime('%Y')
     emiss_year=wrf_time_bjt.strftime('%Y')
+    if emiss_year > 2017: # 20220729：目前meic数据只到2017年，如果后续更新则需要修改。这行代码解决了超出2017年数据pickle的写入与读取文件名不同的问题。
+        emiss_year = 2017
     emiss_month=wrf_time_bjt.strftime('%m')
     domain_id = wrfinput_file.split("_")[-1][-2:]   #"01"
     logger.info("start generating "+wrf_time_utc.strftime("%Y-%m-%d_%H:00:00"))
@@ -368,7 +370,7 @@ def parallel_make_wrfchemi(start_time,end_time,n_jobs=-1):
     timelist=[]   #需要生成排放源的时次(utc)
     while start_time <= end_time:
         timelist.append(start_time)
-        start_time +=  timedelta(hours=hour_step)   #里的hours用来修改输出文件的小时间隔
+        start_time += timedelta(hours=hour_step)   #里的hours用来修改输出文件的小时间隔
 
     if n_jobs == -1:
         n_jobs = multiprocessing.cpu_count()
@@ -378,7 +380,7 @@ def parallel_make_wrfchemi(start_time,end_time,n_jobs=-1):
     for itime in timelist:
         # print("month_already,",month_already)
         itime_bjt = itime + timedelta(hours=8)
-        if not  itime_bjt.strftime("%m")  in   month_already:
+        if not itime_bjt.strftime("%m") in month_already:
             if int(itime_bjt.strftime("%Y"))>2017:
                 make_interp_meic_emission("2017",itime_bjt.strftime("%m"),md5value,lon_inp,lat_inp)
             else:
@@ -388,7 +390,7 @@ def parallel_make_wrfchemi(start_time,end_time,n_jobs=-1):
 
     all_list = []
     for itime in timelist:
-        all_list.append([wrfinput_file,itime,lon_inp,lat_inp,md5value,wrfchemi_save_dir])
+        all_list.append([wrfinput_file, itime, lon_inp, lat_inp, md5value, wrfchemi_save_dir])
 
     with Pool(n_jobs) as p:
         p.map(make_wrfchemi,all_list)

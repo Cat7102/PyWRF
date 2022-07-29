@@ -18,6 +18,8 @@ title_y     = 1.04  # 标题的高度
 # 地理信息绘制设置
 lake_opt    = 0     # 0表示显示湖泊，1表示不显示
 lake_lw, lake_lc    = 0.8, 'black'          # 湖泊的线宽和线的颜色
+river_opt    = 1     # 0表示显示河流，1表示不显示
+river_lw, river_lc  = 0.8, 'blue'         # 河流的线宽和线的颜色
 coastline_lw, coastline_lc  = 0.8, 'black'  # 海岸线的线宽和颜色
 precision   = '10m' # 精度，10m，50m和110m，要加引号
 
@@ -35,7 +37,7 @@ xlabelsize  = 10    # x轴标签的字体大小
 
 # 绘制文件信息设置
 multi_file_draw = True      # 是否进行多文件绘制，需要与子图数对应，默认按照从左到右，从上到下的顺序排列
-path = [r'D:\Data\WRF-Chem_Files\WRF-Chem_Simulation\lcz_2021_07\wrfout_d03_2021-07-12']  # 读取文件的路径
+path = [r'D:\Data\WRF-Chem_Files\WRF-Chem_Simulation\LCZ_2021_Jul_Long_AHModified\wrfout_d03_2021-07-12']  # 读取文件的路径
 contourf_opt    = 1         # 是否开启填充
 contour_opt     = 0         # 是否开启轮廓线绘制
 quiver_opt      = 1         # 是否开启箭头绘制
@@ -44,15 +46,15 @@ var_contour     = 'rh2'     # 绘制等高线的变量
 chem_w          = 0         # 摩尔质量，如果无需摩尔质量输入小于等于0的数字
 u, v            = 'U10', 'V10'  # 经度方向和纬度方向的风速
 loop_draw       = 0         # 1表示开启循环绘制，会按照下面的时间序列绘制多张图
-timelist        = range(48, 264, 1)  # 时间列表，建议使用list格式，如果是连续时间也可以使用range方法,e.g.：range(56, 69, 2)
+timelist        = range(48, 649, 3)  # 时间列表，建议使用list格式，如果是连续时间也可以使用range方法,e.g.：range(56, 69, 2)
 height_contourf = 1         # 填充数据高度，如果没有高度则随便填写一个数字
 height_contour  = 0         # 轮廓线数据高度，如果没有高度则随便填写一个数字
 height_quiver   = 0         # 轮廓线数据高度，如果没有高度则随便填写一个数字
 
 # 填充图形信息设置
 cmap    = cmaps.matlab_jet         # 填色的颜色类型，具体参考colormap与cmaps库
-contourf_level  = np.arange(20, 40.5, 0.5)      # 填色的最小值，最大值和间隔，如果要使用默认的则改成None
-contourf_ticks  = np.arange(20, 40.5, 1)       # 设置colorbar的ticks，如果不需要写成None
+contourf_level  = np.arange(20, 42.5, 0.5)      # 填色的最小值，最大值和间隔，如果要使用默认的则改成None
+contourf_ticks  = np.arange(20, 42.5, 1)       # 设置colorbar的ticks，如果不需要写成None
 colorbar_extend = 'neither'     # colorbar是否带箭头，'neither'和'both'
 
 # 等高线绘制信息设置
@@ -129,7 +131,7 @@ legend_fontsize        = 8 #字体大小
 wspace, hspace  = 0.2, 0.2     # 子图的横向间距和纵向间距
 
 # 图片保存信息设置
-fig_path        = r"D:\Data\WRF-Chem_Files\WRF-Chem_Simulation\[WRF-Post]\lcz_2021_07"   # 图片保存路径
+fig_path        = r"D:\Data\WRF-Chem_Files\WRF-Chem_Simulation\[WRF-Post]\LCZ_2021_Jul_Long_AHModified"   # 图片保存路径
 fig_name_base   = "lcz202107_"    # 图片保存的基础名
 fig_name_end    = "time"                # 循环作图时图片的后缀
 save_dpi        = 600  # 保存图片的DPI值

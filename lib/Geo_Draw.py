@@ -86,7 +86,7 @@ class Figure4wrf():
         if river_opt == 0:
             LAKES_border = cfeat.NaturalEarthFeature('physical', 'lakes', precision, edgecolor=river_lc,
                                                      facecolor='never')
-            self.axe.add_feature(LAKES_border, linewidth=lake_lw, zorder=1)
+            self.axe.add_feature(LAKES_border, linewidth=river_lw, zorder=1)
             print("绘制湖泊")
         if lake_opt == 1:
             print("不绘制湖泊")

@@ -24,7 +24,7 @@ def draw_geogrid(file,var,level=None,cmap=cmaps.ncl_default):
     gl.ylocator = mticker.FixedLocator(np.arange(30.7, 31.7, 0.2))
     X,Y=getvar(nc.Dataset(file),"XLONG_M").values,getvar(nc.Dataset(file),"XLAT_M")
     F=getvar(nc.Dataset(file),var).values
-    F[np.where(F==13)]=41 # lcz分类中不应该出现13分类，在之前的数据处理中理应解决这一问题
+    #F[np.where(F==13)]=41 # lcz分类中不应该出现13分类，在之前的数据处理中理应解决这一问题
     print("最大值为：{}，最小值为{}".format(np.max(F),np.min(F)))
     classification = np.unique(F)   # 获得本张图内涉及的土地利用分类
     classification=classification.astype(int)
@@ -51,6 +51,7 @@ def draw_geogrid(file,var,level=None,cmap=cmaps.ncl_default):
                prop=FontProperties(fname="./font/SimSun.ttf", size=12))
     l2=plt.legend(loc="lower right",prop=FontProperties(fname="./font/SimSun.ttf", size=12),bbox_to_anchor=(1.22,-0.03))
     axe.add_artist(l1)
+    axe.add_artist(l2)
     ######################
     fig.show()
     plt.show()
@@ -58,7 +59,7 @@ def draw_geogrid(file,var,level=None,cmap=cmaps.ncl_default):
 if __name__ == '__main__':
     #draw_geogrid(r"/home/fishercat/Build_WRF/Simulations/ucm_modified1/geo_em.d03.nc","HGT_M")
     draw_geogrid(r"D:\Data\WRF-Chem_Files\WRF-Chem_Simulation\LCZ_2021_Jul_Long_origin\geo_em.d03.nc","LU_INDEX",
-                 {1:"针叶林",2:"阔叶林",5:"混叶林",6:"封闭灌木丛",7:"开放灌木丛",10:"草地",11:"湿地",12:"耕地", 14:"耕地植被"
+                 {1:"针叶林",2:"阔叶林",5:"混叶林",6:"封闭灌木丛",7:"开放灌木丛",10:"草地",11:"湿地",12:"耕地",13:"城市用地", 14:"耕地植被"
                      ,15:"冰雪",16:"植被稀少的土地",17:"水",19:"荒原",20:"裸地荒原",
                   31:"紧凑高层",32:"紧凑中层",33:"紧凑低层",34:"开放高层",35:"开放中层",36:"开放低层",
                   37:"轻量低层",38:"厂区",39:"分散建筑",40:"重工业",41:"人工地表"},

@@ -96,7 +96,7 @@ for fig_num in range(int(len(timelist) / num_in_fig)):
         # 初始化图片
         fig.init_draw(ver_num, hor_num, cur_num + 1, axe_title, title_size, title_y)
         # 地理信息绘制
-        fig.geo_draw(lake_opt, lake_lw, lake_lc, coastline_lw, coastline_lc, precision)
+        fig.geo_draw(lake_opt, lake_lw, lake_lc,river_opt,river_lw, river_lc, coastline_lw, coastline_lc, precision)
         # 图形范围绘制
         fig.extent_draw(west_lon, east_lon, south_lat, north_lat, extra)
         # 网格绘制
