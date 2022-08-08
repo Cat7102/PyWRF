@@ -21,3 +21,20 @@ def get_ncfile_point_height2earth(path,point_lat,point_lon):
 	h2e=height-hgt
 	return h2e
 
+def get_ncfile_point_height_index(path,index_lat,index_lon):
+	ncfile=nc.Dataset(path)
+	height = to_np(getvar(ncfile, "height"))[:, index_lon, index_lat]
+	return height
+
+def get_ncfile_point_pressure_index(path,index_lat,index_lon):
+	ncfile=nc.Dataset(path)
+	pressure = to_np(getvar(ncfile, "pressure"))[:, index_lon, index_lat]
+	return pressure
+
+def get_ncfile_point_height2earth_index(path,index_lat,index_lon):
+	ncfile=nc.Dataset(path)
+	hgt = ncfile.variables['HGT'][0, index_lon, index_lat]
+	height = to_np(getvar(ncfile, "height"))[:, index_lon, index_lat]
+	h2e=height-hgt
+	return h2e
+
